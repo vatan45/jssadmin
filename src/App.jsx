@@ -9,14 +9,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
-        <Route
-          path="/admin"
-          element={
 
-            <AdminDashboard />
-
-          }
-        />
 
       </Routes>
     </Router>
