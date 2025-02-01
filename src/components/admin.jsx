@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bell, Package, Clock, Settings, Menu, X, User, ChevronDown, Search, TrendingUp, AlertCircle, MapPin } from 'lucide-react';
-
-const API_URL = 'http://localhost:5000/api'; // Change this to your backend URL
+// Change this to your backend URL
 
 // Add this StatusBadge component before the AdminDashboard component
 const StatusBadge = ({ status }) => {
@@ -60,8 +59,8 @@ const AdminDashboard = () => {
                 id: order._id,
                 customer: order.customerName || 'No Name',
                 phone: order.customerPhone || 'No Phone',
-                address: order.deliveryAddress ? 
-                    `${order.deliveryAddress.flatNo}, ${order.deliveryAddress.society}, ${order.deliveryAddress.area}` 
+                address: order.deliveryAddress ?
+                    `${order.deliveryAddress.flatNo}, ${order.deliveryAddress.society}, ${order.deliveryAddress.area}`
                     : 'No Address',
                 customerLocation: order.customerLocation || null,
                 items: order.orderItems.map(item => ({
@@ -70,12 +69,12 @@ const AdminDashboard = () => {
                     price: item.price,
                     totalPrice: item.totalPrice
                 })),
-                total: order.orderTotal?.total || 
+                total: order.orderTotal?.total ||
                     order.orderItems.reduce((sum, item) => sum + item.totalPrice, 0),
                 status: order.orderStatus?.toLowerCase() || 'pending',
                 time: order.orderDate || order.createdAt
             }));
-            
+
             console.log('Transformed orders:', transformedOrders);
             setOrders(transformedOrders);
             setError(null);
@@ -415,19 +414,19 @@ const AdminDashboard = () => {
                                             </div>
                                             <StatusBadge status={order.status} />
                                         </div>
-                                        
+
                                         {/* Address and Location Section */}
                                         <div className="space-y-2">
                                             <p className="text-gray-600 text-xs md:text-sm flex items-center">
                                                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
                                                 {order.address}
                                             </p>
-                                            
+
                                             {/* Google Maps Link */}
                                             {order.customerLocation && (
                                                 <a
